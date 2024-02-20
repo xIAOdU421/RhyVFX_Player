@@ -1,0 +1,66 @@
+
+.idea/.name
+.idea/FrcePlyr.iml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/jsonSchemas.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+__pycache__/player.cpython-311.pyc
+__pycache__/settings.cpython-311.pyc
+__pycache__/textures.cpython-311.pyc
+__pycache__/ui.cpython-311.pyc
+assets/images/arrows/cache/arrowDOWN0000.png
+assets/images/arrows/cache/arrowLEFT0000.png
+assets/images/arrows/cache/arrowRIGHT0000.png
+assets/images/arrows/cache/arrowUP0000.png
+assets/images/arrows/cache/blue alone0000.png
+assets/images/arrows/cache/blue hold0000.png
+assets/images/arrows/cache/blue tail0000.png
+assets/images/arrows/cache/down confirm0000.png
+assets/images/arrows/cache/down confirm0001.png
+assets/images/arrows/cache/down confirm0002.png
+assets/images/arrows/cache/down confirm0003.png
+assets/images/arrows/cache/down press0000.png
+assets/images/arrows/cache/down press0001.png
+assets/images/arrows/cache/down press0002.png
+assets/images/arrows/cache/down press0003.png
+assets/images/arrows/cache/green alone0000.png
+assets/images/arrows/cache/green hold0000.png
+assets/images/arrows/cache/green tail0000.png
+assets/images/arrows/cache/left confirm0000.png
+assets/images/arrows/cache/left confirm0001.png
+assets/images/arrows/cache/left confirm0002.png
+assets/images/arrows/cache/left confirm0003.png
+assets/images/arrows/cache/left press0000.png
+assets/images/arrows/cache/left press0001.png
+assets/images/arrows/cache/left press0002.png
+assets/images/arrows/cache/left press0003.png
+assets/images/arrows/cache/purple alone0000.png
+assets/images/arrows/cache/purple hold0000.png
+assets/images/arrows/cache/purple tail0000.png
+assets/images/arrows/cache/red alone0000.png
+assets/images/arrows/cache/red hold0000.png
+assets/images/arrows/cache/red tail0000.png
+assets/images/arrows/cache/right confirm0000.png
+assets/images/arrows/cache/right confirm0001.png
+assets/images/arrows/cache/right confirm0002.png
+assets/images/arrows/cache/right confirm0003.png
+assets/images/arrows/cache/right press0000.png
+assets/images/arrows/cache/right press0001.png
+assets/images/arrows/cache/right press0002.png
+assets/images/arrows/cache/right press0003.png
+assets/images/arrows/cache/up confirm0000.png
+assets/images/arrows/cache/up confirm0001.png
+assets/images/arrows/cache/up confirm0002.png
+assets/images/arrows/cache/up confirm0003.png
+assets/images/arrows/cache/up press0000.png
+assets/images/arrows/cache/up press0001.png
+assets/images/arrows/cache/up press0002.png
+assets/images/arrows/cache/up press0003.png
+assets/images/test/1.png
+assets/images/test/2.png
+assets/images/test/3.png
+assets/images/test/4.png
+test.py

@@ -1,0 +1,468 @@
+{
+  "songName": "",
+  "songAuthor": "",
+  "mapAuthor": "",
+  "speed": 0.3,
+  "chartFrameIds": [
+    [
+      {
+        "unitId": 40.09265899658203,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 68.80841255187988,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 95.44968605041504,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 125.38352012634277,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 153.95965576171875,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 181.88490867614746,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 208.20956230163574,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 235.90235710144043,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 263.2164001464844,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 292.5163745880127,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 322.31550216674805,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 350.2243995666504,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 377.3688316345215,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 403.9558410644531,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 431.5284729003906,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 459.52911376953125,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 487.7509593963623,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 514.2368316650391,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 535.6140613555908,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 556.2400341033936,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 586.0583782196045,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 615.2048587799072,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 645.5195903778076,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 675.3185749053955,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 704.4823169708252,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 733.8865756988525,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 763.7760162353516,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 794.6807861328125,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 823.5226631164551,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 855.324649810791,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 884.2281818389893,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 914.1664981842041,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 943.6967849731445,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 972.290563583374,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1002.2006988525391,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1033.9462757110596,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1061.4426612854004,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1093.9172267913818,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1112.1617794036865,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1139.123249053955,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1167.341709136963,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1195.7615375518799,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1225.5596160888672,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1255.4882526397705,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1283.3648681640625,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1310.1428985595703,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1345.5597400665283,
+        "tailLengthUnitId": 3.333333372286992e-07
+      }
+    ],
+    [
+      {
+        "unitId": 1377.3016452789307,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1407.0915699005127,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1437.2526168823242,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1467.4712181091309,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1496.0869312286377,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1523.1594562530518,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1557.6005458831787,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1586.7934226989746,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1617.4716472625732,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1646.3646411895752,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1675.7389068603516,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1705.4190158843994,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1735.4063510894775,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1765.1759147644043,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1795.3462600708008,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1824.1481304168701,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1854.7404289245605,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1883.3240032196045,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1912.3684883117676,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1944.014024734497,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 1975.7314682006836,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2003.4458637237549,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2034.0951919555664,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2063.091468811035,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2093.948173522949,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2122.95823097229,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2149.5151042938232,
+        "tailLengthUnitId": 3.333333372286992e-07
+      }
+    ],
+    [
+      {
+        "unitId": 2188.6931896209717,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2221.838140487671,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2247.4884510040283,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2276.0557174682617,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2305.030584335327,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2333.6976528167725,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2363.0958557128906,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2390.7063007354736,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2419.1296577453613,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2447.202444076538,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2474.1554260253906,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2499.4958877563477,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2525.1675128936768,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2553.3129692077637,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2582.4697971343994,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2612.2035026550293,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2641.3740634918213,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2667.6021575927734,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2696.566581726074,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2725.2230167388916,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2755.3634643554688,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2785.7555389404297,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2816.2997722625732,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2842.686080932617,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2871.9061851501465,
+        "tailLengthUnitId": 3.333333372286992e-07
+      }
+    ],
+    [
+      {
+        "unitId": 2905.378007888794,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2931.6450595855713,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2959.583902359009,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 2989.0974044799805,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3017.080307006836,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3049.075126647949,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3074.7189044952393,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3104.547119140625,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3133.3186626434326,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3163.192367553711,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3189.619779586792,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3216.977548599243,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3243.4037685394287,
+        "tailLengthUnitId": 3.333333372286992e-07
+      },
+      {
+        "unitId": 3260.5031967163086,
+        "tailLengthUnitId": 3.333333372286992e-07
+      }
+    ]
+  ]
+}

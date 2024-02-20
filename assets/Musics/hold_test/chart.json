@@ -1,0 +1,44 @@
+{
+  "songName": "",
+  "songAuthor": "",
+  "mapAuthor": "",
+  "speed": 0.3,
+  "chartFrameIds": [
+    [
+      {
+        "unitId": 0,
+        "tailLengthUnitId": 219.97090657552084
+      },
+      {
+        "unitId": 635.2627506256104,
+        "tailLengthUnitId": 144.79400634765625
+      }
+    ],
+    [
+      {
+        "unitId": 8.0,
+        "tailLengthUnitId": 294.5243835449219
+      },
+      {
+        "unitId": 783.7807235717773,
+        "tailLengthUnitId": 310.66975911458337
+      }
+    ],
+    [
+      {
+        "unitId": 168.55041885375977,
+        "tailLengthUnitId": 255.0060017903646
+      }
+    ],
+    [
+      {
+        "unitId": 0,
+        "tailLengthUnitId": 219.97090657552084
+      },
+      {
+        "unitId": 423.89495277404785,
+        "tailLengthUnitId": 211.4459228515625
+      }
+    ]
+  ]
+}
