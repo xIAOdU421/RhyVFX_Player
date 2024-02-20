@@ -14,7 +14,7 @@ class Flash(Entity):
         )
         self.animate_color(finishColor,duration=time)
 
-Flash(3,color.black,color.clear)
+Flash(10,color.black,color.clear)
 
 
 
