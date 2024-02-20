@@ -211,6 +211,28 @@ class GameSurface(Entity):
         self.arrow3 = Arrow(2,parent=self,timeList=self.timeList,trackLength=surfaceLength,unitDis=unitDis)
         self.arrow4 = Arrow(3,parent=self,timeList=self.timeList,trackLength=surfaceLength,unitDis=unitDis)
 
+        # Entity(model='quad',
+        #        # parent=self,
+        #        scale=(30,0.001,1),
+        #        z=self.world_position.z,
+        #        y=self.arrow1.y - (self.unitDis * (ranks['sick']/ 1000 * 200)))
+        # #
+        # Entity(model='quad',
+        #        # parent=self,
+        #        scale=(30,0.001,1),
+        #        z=self.world_position.z,
+        #        y=self.arrow1.y - (self.unitDis * (ranks['good']/ 1000 * 200)))
+        # Entity(model='quad',
+        #        # parent=self,
+        #        scale=(30,0.001,1),
+        #        z=self.world_position.z,
+        #        y=self.arrow1.y - (self.unitDis * (ranks['bad']/ 1000 * 200)))
+        # Entity(model='quad',
+        #        # parent=self,
+        #        scale=(30,0.001,1),
+        #        z=self.world_position.z,
+        #        y=self.arrow1.y - (self.unitDis * (ranks['shit']/ 1000 * 200)))
+
         # a = Entity(model='quad',
         #        scale=(30,0.001,1),
         #        y=self.arrow1.y - (self.unitDis*ranks['miss']*0.001/200),
@@ -239,7 +261,7 @@ class GameSurface(Entity):
 # gameSuface2.x = 0.2
 
 class RankText(Entity):
-    def __init__(self,rank,**kwargs):
+    def __init__(self,rank,score,**kwargs):
         super().__init__(
             model='quad',
             parent=gameUi,
@@ -332,34 +354,18 @@ class Chart(Entity):
         global currentDestroy
 
     def chartPress(self):
+        global currentScore
         if self.y >= self.bindArrow.y - (self.speed*ranks['miss']/1000*200):
-            self.rank()
+
             self.tail.bindObj = self.bindArrow
             self.tail.needHold = True
             healthBars.damage_enemy()
+            print(1)
+            currentScore += 300 - int(abs(self.bindArrow.y - self.y) * 10)
+            print(2)
             destroy(self)
             chartEntity.remove(self)
 
-
-    def rank(self):
-        global currentScore
-
-        if self.y >= self.bindArrow.y - (self.speed * ranks['sick']/ 1000 * 200) \
-                or self.y <= self.bindArrow.y + (self.speed * ranks['sick'] / 1000 * 200):
-            RankText('sick')
-            currentScore += rankScore['sick']
-        elif self.y >= self.bindArrow.y - (self.speed * ranks['good']/ 1000 * 200) \
-                or self.y <= self.bindArrow.y + (self.speed * ranks['good'] / 1000 * 200):
-            RankText('good')
-            currentScore += rankScore['good']
-        elif self.y >= self.bindArrow.y - (self.speed * ranks['bad']/ 1000 * 200) \
-                or self.y <= self.bindArrow.y + (self.speed * ranks['bad'] / 1000 * 200):
-            RankText('bad')
-            currentScore += rankScore['bad']
-        elif self.y >= self.bindArrow.y - (self.speed * ranks['shit']/ 1000 * 200) \
-                or self.y <= self.bindArrow.y + (self.speed * ranks['shit'] / 1000 * 200):
-            RankText('shit')
-            currentScore += rankScore['shit']
 
 
 class Tail(Entity):
