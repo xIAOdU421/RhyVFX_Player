@@ -6,6 +6,10 @@
   "chartFrameIds": [
     [
       {
+        "unitId": 0,
+        "tailLengthUnitId": 0
+      },
+      {
         "unitId": 40.09265899658203,
         "tailLengthUnitId": 3.333333372286992e-07
       },
@@ -195,6 +199,10 @@
       }
     ],
     [
+      {
+        "unitId": 0,
+        "tailLengthUnitId": 0
+      },
       {
         "unitId": 1377.3016452789307,
         "tailLengthUnitId": 3.333333372286992e-07

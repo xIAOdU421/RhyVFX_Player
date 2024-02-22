@@ -10,8 +10,7 @@ class Mod(Entity):
         self.mod = None
 
     def input(self,event):
-        print(event)
         if event and not self.started:
             destroy(self.startText)
-            self.mod = import_module(f'assets.data.{settings.currentSong}.main')
+            self.mod = import_module(f'assets.mods.{settings.currentSong}.main')
             self.started = True

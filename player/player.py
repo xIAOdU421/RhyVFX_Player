@@ -15,9 +15,10 @@ class HealthBars(Entity):
 
     def __init__(self,length):
         super().__init__(model='quad',
-            texture='assets/images/ui/healthBar.png',
+            # texture='assets/images/ui/healthBar.png',
+            color=color.clear,
             parent=gameUi,
-            position=(0,-.168,0),
+            position=(0,-.2,0),
             scale=(length,0.01,1))
 
         self.health_self = 50
@@ -26,24 +27,25 @@ class HealthBars(Entity):
         self.damage = 5
         self.length = length
 
-        self.healthBar_outLine = Entity(
-
-        )
+        # self.healthBar_outLine = Entity(
+        #
+        # )
 
         self.healthBar_enemy = Entity(
             model='quad',
-            color=color.red,
+            color=color.clear,
             parent=self,
             scale=(0.5, 1, 1),
             origin_x=-0.5,
             position=(-0.5,
                       0,
                       0.00001
-                      )
+                      ),
+
         )
         self.healthBar_self = Entity(
             model='quad',
-            color=color.green,
+            color=color.white,
             parent=self,
             scale=(0.5, 1, 1),
             origin_x=0.5,
@@ -54,8 +56,9 @@ class HealthBars(Entity):
         )
 
     def update(self):
-        self.healthBar_self.scale_x = 0.5 * self.health_self / 50
-        self.healthBar_enemy.scale_x = 0.5 * self.health_enemy / 50
+
+        # self.healthBar_self.scale_x = 0.5 * self.health_self / 50
+        # self.healthBar_enemy.scale_x = 0.5 * self.health_enemy / 50
         if self.health_self >= 100:
             self.health_self = 100
         if self.health_enemy >= 100:
@@ -76,6 +79,10 @@ class HealthBars(Entity):
             self.health_self -= self.damage
             self.health_enemy += self.damage
 
+        self.healthBar_enemy.animate_scale((0.5 * self.health_enemy / 50, 1, 1), duration=0.8, curve=curve.out_cubic)
+        self.healthBar_self.animate_scale((0.5 * self.health_self / 50,1,1),duration=0.8,curve=curve.out_cubic)
+
+
     def damage_enemy(self):
         if self.health_self + self.damage >= 100:
             self.health_self = 100
@@ -84,8 +91,11 @@ class HealthBars(Entity):
             self.health_self += self.damage
             self.health_enemy -= self.damage
 
+        self.healthBar_self.animate_scale((0.5 * self.health_self / 50,1,1),duration=0.8,curve=curve.out_cubic)
+        self.healthBar_enemy.animate_scale((0.5 * self.health_enemy / 50, 1, 1), duration=0.8, curve=curve.out_cubic)
 
-healthBars = HealthBars(0.4)
+
+healthBars = HealthBars(0.75)
 
 class PressAnimation(Entity):
     def __init__(self,arrowId,aniTime,aniTextures,parent,**kwargs):
@@ -110,7 +120,7 @@ class PressAnimation(Entity):
 
 
 class Arrow(Entity):
-    def __init__(self,arrowId,parent,timeList,trackLength,unitDis,**kwargs):
+    def __init__(self,arrowId,parent,timeList,trackLength,unitDis,autoPlay,**kwargs):
         super().__init__()
         self.textures = [
             arrowTextures.arrows.LEFT,
@@ -131,8 +141,6 @@ class Arrow(Entity):
         self.originX = -0.075
         self.arrowId = arrowId
         self.x = self.originX + self.scale_x * self.arrowId
-
-
 
         self.arrowAni = partial(
             PressAnimation,
@@ -155,6 +163,8 @@ class Arrow(Entity):
         self.started = False
         self.gameLast = time.time()
         self.currentChart = 0
+        self.autoPlay = autoPlay
+
 
 
     def update(self):
@@ -176,15 +186,12 @@ class Arrow(Entity):
                     tailLength=tailLength,
                     trackId=self.arrowId
                 )
-
-
                 self.currentChart += 1
 
 
     def input(self,event):
 
         if event == settings.keys[self.arrowId]:
-
             self.arrowAni()
             try:
                 chart = find_nearest_specific_entity(self)
@@ -195,60 +202,47 @@ class Arrow(Entity):
 
 
 class GameSurface(Entity):
-    def __init__(self,songName,surfaceLength,unitDis,botplay=False,):
+    def __init__(self,songName,surfaceLength,unitDis,autoplay=False):
         super().__init__(z=1.2)
         self.songName = songName
         self.surfaceLength = surfaceLength
         self.unitDis = unitDis
-        self.botplay = botplay
+        self.autoplay = autoplay
         self.timeList = unit2time(songName)
         self.started = False
         self.startLast = time.time()
         self.offset = self.surfaceLength/200
 
-        self.arrow1 = Arrow(0,parent=self,timeList=self.timeList,trackLength=surfaceLength,unitDis=unitDis)
-        self.arrow2 = Arrow(1,parent=self,timeList=self.timeList,trackLength=surfaceLength,unitDis=unitDis)
-        self.arrow3 = Arrow(2,parent=self,timeList=self.timeList,trackLength=surfaceLength,unitDis=unitDis)
-        self.arrow4 = Arrow(3,parent=self,timeList=self.timeList,trackLength=surfaceLength,unitDis=unitDis)
 
-        # Entity(model='quad',
-        #        # parent=self,
-        #        scale=(30,0.001,1),
-        #        z=self.world_position.z,
-        #        y=self.arrow1.y - (self.unitDis * (ranks['sick']/ 1000 * 200)))
-        # #
-        # Entity(model='quad',
-        #        # parent=self,
-        #        scale=(30,0.001,1),
-        #        z=self.world_position.z,
-        #        y=self.arrow1.y - (self.unitDis * (ranks['good']/ 1000 * 200)))
-        # Entity(model='quad',
-        #        # parent=self,
-        #        scale=(30,0.001,1),
-        #        z=self.world_position.z,
-        #        y=self.arrow1.y - (self.unitDis * (ranks['bad']/ 1000 * 200)))
-        # Entity(model='quad',
-        #        # parent=self,
-        #        scale=(30,0.001,1),
-        #        z=self.world_position.z,
-        #        y=self.arrow1.y - (self.unitDis * (ranks['shit']/ 1000 * 200)))
+        self.arrow1 = Arrow(0, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
+                            autoPlay=autoplay)
+        self.arrow2 = Arrow(1, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
+                            autoPlay=autoplay)
+        self.arrow3 = Arrow(2, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
+                            autoPlay=autoplay)
+        self.arrow4 = Arrow(3, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
+                            autoPlay=autoplay)
 
-        # a = Entity(model='quad',
-        #        scale=(30,0.001,1),
-        #        y=self.arrow1.y - (self.unitDis*ranks['miss']*0.001/200),
-        #        z = self.z,
-        #        parent=self
+        # Entity(
+        #     model='quad',
+        #     scale=(30,0.001,1),
+        #     parent=self,
+        #     z=self.world_z,
+        #     y=self.arrow1.y - (self.unitDis*windowRange/1000*200)
+        #
         # )
-        # print(a.y)
-
 
     def update(self):
+        # print_on_screen(abs(self.arrow1.y - (self.unitDis * windowRange / 1000 * 200)))
+        # print_on_screen(300 - int(0))
+
+        # print_on_screen()
         if settings.debugMode:
             print_on_screen(self.arrow1.x)
 
         if not self.started and time.time() >= self.startLast + self.offset:
             # print(True)
-            self.sound = Audio(f'./assets/Musics/{self.songName}/Inst.ogg')
+            self.sound = Audio(f'./assets/mods/{self.songName}/song/song.ogg')
             self.started = True
 
     # def update(self):
@@ -260,31 +254,6 @@ class GameSurface(Entity):
 # gameSuface.x = -0.2
 # gameSuface2.x = 0.2
 
-class RankText(Entity):
-    def __init__(self,rank,score,**kwargs):
-        super().__init__(
-            model='quad',
-            parent=gameUi,
-            scale=(0.12,0.05)
-        )
-        self.textures = {
-            'sick':'./assets/images/sick.png',
-            'good': './assets/images/good.png',
-            'bad': './assets/images/bad.png',
-            'shit': './assets/images/shit.png'
-        }
-        self.texture = self.textures[rank]
-        self.animate_position((
-            self.x,self.y-0.05,self.z
-        ),duration=0.5,curve=curve.in_back)
-        self.aniLast = time.time()
-
-    def update(self):
-        self.alpha = 1 - (time.time() - self.aniLast)*2
-
-        if self.alpha < 0:
-            destroy(self)
-        # print_on_screen(self.alpha)
 
 
 
@@ -326,23 +295,22 @@ class Chart(Entity):
         global currentMisses
         global currentScore
         global currentDestroy
+
         # print_on_screen(currentDestroy)
         self.y = self.originY + (time.time()-self.aniLast)*200 * self.speed
 
-        if self.y > self.bindArrow.y + (self.speed*ranks['miss']/1000*200) and not self.missed:
-
-
+        if self.y > self.bindArrow.y + (self.speed*windowRange/1000*200) and not self.missed:
             currentMisses += 1
             healthBars.damage_self()
-            currentScore += rankScore['miss']
+            currentScore += -100
             self.missed = True
         try:
-            if self.y > self.bindArrow.y + (self.speed * ranks['miss'] / 1000 * 200) + self.tail.scale_y:
+            if self.y > self.bindArrow.y + (self.speed * windowRange / 1000 * 200) + self.tail.scale_y:
                 destroy(self.tail)
                 destroy(self)
                 chartEntity.remove(self)
         except Exception:
-            if self.y > self.bindArrow.y + (self.speed * ranks['miss'] / 1000 * 200):
+            if self.y > self.bindArrow.y + (self.speed * windowRange / 1000 * 200):
                 destroy(self)
                 chartEntity.remove(self)
 
@@ -355,14 +323,17 @@ class Chart(Entity):
 
     def chartPress(self):
         global currentScore
-        if self.y >= self.bindArrow.y - (self.speed*ranks['miss']/1000*200):
-
+        if self.y >= self.bindArrow.y - (self.speed*windowRange/1000*200):
             self.tail.bindObj = self.bindArrow
             self.tail.needHold = True
             healthBars.damage_enemy()
-            print(1)
-            currentScore += 300 - int(abs(self.bindArrow.y - self.y) * 10)
-            print(2)
+            currentScore += int(300 - 300*(abs(self.bindArrow.y - self.y)/(self.speed * windowRange / 1000 * 200)))
+            # print_on_screen(
+            #     str(int(300 - 300*(abs(self.bindArrow.y - self.y)/(self.speed * windowRange / 1000 * 200))))+'\n'+
+            #     str(abs(self.bindArrow.y - self.y))
+            # )
+            # print_on_screen(abs(self.bindArrow.y - self.y))
+
             destroy(self)
             chartEntity.remove(self)
 
@@ -471,6 +442,7 @@ def update():
     # print(currentScore)
     gameUi.score.text = 'Score:'+str(currentScore)
     gameUi.misses.text = 'Misses:'+str(currentMisses)
+
 
 
 
