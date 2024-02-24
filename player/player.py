@@ -1,4 +1,5 @@
 #
+import os.path
 import time
 
 from ursina import *
@@ -296,7 +297,7 @@ class GameSurface(Entity):
 
         if not self.started and time.time() >= self.startLast + self.offset:
             # print(True)
-            self.sound = Audio(f'./assets/mods/{self.songName}/song/song.ogg')
+            self.sound = Audio('./assets/song/song.ogg')
             self.started = True
 
 
