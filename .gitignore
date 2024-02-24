@@ -68,3 +68,8 @@ test.py
 .idea/RhyVFX_Player.iml
 *.pyd
 *.dll
+build.json
+stdout
+test.py
+test.fsh
+assets/images/ui/healthBar.png
