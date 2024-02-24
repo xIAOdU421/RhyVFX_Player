@@ -97,65 +97,109 @@ class HealthBars(Entity):
 
 healthBars = HealthBars(0.75)
 
-class PressAnimation(Entity):
-    def __init__(self,arrowId,aniTime,aniTextures,parent,**kwargs):
+
+class RectRound(Entity):
+    def __init__(self,roundPosition,roundScale,gameSurParent,aniKey):
         super().__init__()
-        self.arrowId = arrowId
-        self.aniTime = aniTime
-        self.aniTextures = aniTextures
-        self.parent = parent
+        self.model='quad'
+        self.texture='./assets/images/rectRound.png'
+        self.parent = gameSurParent
+        self.scale = roundScale
+        self.world_position = roundPosition
+        self.aniKey = aniKey
+        self.inital_scale = roundScale
 
         self.aniLast = time.time()
-        self.currentFrame = 0
+        self.autoPressState = False # False down   True up
+        self.autoPressLast = time.time()
+
+
 
     def update(self):
-        if held_keys[settings.keys[self.arrowId]]:
-            if time.time() >= self.aniLast + 0.01:
-                if self.currentFrame + 1 <= len(self.aniTextures) - 1:
-                    self.currentFrame += 1
-                self.aniLast = time.time()
-        else:
-            self.currentFrame = 0
-        self.parent.texture = self.aniTextures[self.currentFrame]
+        if time.time() >= self.aniLast + 1/200:
+            self.rotation_z -= 0.1
+            self.aniLast = time.time()
 
 
-class Arrow(Entity):
+        if time.time() >= self.autoPressLast + .1 and self.autoPressState:
+            self.animate_scale(
+                self.inital_scale*1,
+                duration=0.05,
+                curve=curve.out_sine
+            )
+            self.autoPressState = False
+
+
+
+
+    def input(self,event):
+        if event == self.aniKey and not settings.autoPlay:
+            self.animate_scale(
+                self.inital_scale*1.4,
+                duration=0.05,
+                curve=curve.out_sine
+            )
+        if event == self.aniKey+' up' and not settings.autoPlay:
+            self.animate_scale(
+                self.inital_scale*1,
+                duration=0.05,
+                curve=curve.out_sine
+            )
+
+    def pressAni(self):
+        self.animate_scale(
+            self.inital_scale * 1.4,
+            duration=0.05,
+            curve=curve.out_sine
+        )
+        self.autoPressState = True
+        self.autoPressLast = time.time()
+
+
+
+
+
+class Round(Entity):
     def __init__(self,arrowId,parent,timeList,trackLength,unitDis,autoPlay,**kwargs):
         super().__init__()
-        self.textures = [
-            arrowTextures.arrows.LEFT,
-            arrowTextures.arrows.DOWN,
-            arrowTextures.arrows.UP,
-            arrowTextures.arrows.RIGHT
-        ]
-        self.pressTextures = [arrowTextures.press.LEFT,
-                             arrowTextures.press.DOWN,
-                             arrowTextures.press.UP,
-                             arrowTextures.press.RIGHT]
-        self.pressTexture = self.pressTextures[arrowId]
+
         self.model = 'quad'
-        self.texture = self.textures[arrowId]
+
+        self.texture = './assets/images/rectRound.png'
+
 
         self.y = 0.15
-        self.scale = 0.057
-        self.originX = -0.075
+        self.scale = 0.05
+        self.originX = -0.1
         self.arrowId = arrowId
-        self.x = self.originX + self.scale_x * self.arrowId
+        self.x = self.originX + (self.scale_x+0.02) * self.arrowId
 
-        self.arrowAni = partial(
-            PressAnimation,
-            arrowId=self.arrowId,
-            aniTime=0.8,
-            aniTextures=[
-                self.textures[arrowId],
-                self.pressTextures[arrowId][0],
-                self.pressTextures[arrowId][1],
-                self.pressTextures[arrowId][2],
-                self.pressTextures[arrowId][3],
-            ],
-            parent=self
-        )
+
         self.parent = parent
+        self.round_inside = RectRound(roundPosition=self.world_position,
+                  roundScale=self.scale*0.65,
+                  gameSurParent=self.parent,
+                  aniKey=settings.keys[arrowId]
+        )
+        self.roundText = Text(
+            text=str(arrowId+1),
+            parent=self,
+            position=self.position,
+            x=self.x-0.2,
+            scale=20,
+            world_rotation=0,
+            origin=0,
+
+        )
+
+        self.trackLine = Entity(
+            model='quad',
+            scale=(0.001,30),
+            parent=self.parent,
+            origin_y=0.5,
+            position=self.position,
+        )
+
 
         self.timeListForSelf = timeList[arrowId]
         self.trackLength = trackLength
@@ -165,9 +209,16 @@ class Arrow(Entity):
         self.currentChart = 0
         self.autoPlay = autoPlay
 
-
+        self.rot_aniLast = time.time()
+        
+        
 
     def update(self):
+        self.roundText.world_rotation_z = 0
+
+        if time.time() >= self.rot_aniLast + 1/200:
+            self.rotation_z += 0.1
+            self.rot_aniLast = time.time()
 
         if settings.debugMode:
             self.x += held_keys['d'] * 0.001
@@ -179,7 +230,7 @@ class Arrow(Entity):
         if self.currentChart < len(self.timeListForSelf):
             if time.time()-self.gameLast >= list(self.timeListForSelf.keys())[self.currentChart]:
                 tailLength = self.timeListForSelf[list(self.timeListForSelf.keys())[self.currentChart]]
-                Chart(
+                Note(
                     bindArrow=self,
                     originY=self.unitDis*self.trackLength,
                     speed=self.unitDis,parent=self.parent,
@@ -189,13 +240,16 @@ class Arrow(Entity):
                 self.currentChart += 1
 
 
+
+
+
     def input(self,event):
 
         if event == settings.keys[self.arrowId]:
-            self.arrowAni()
             try:
-                chart = find_nearest_specific_entity(self)
-                chart.chartPress()
+                if not settings.autoPlay:
+                    chart = find_nearest_specific_entity(self)
+                    chart.chartPress()
             except Exception:
                 pass
 
@@ -214,13 +268,13 @@ class GameSurface(Entity):
         self.offset = self.surfaceLength/200
 
 
-        self.arrow1 = Arrow(0, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
+        self.arrow1 = Round(0, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
                             autoPlay=autoplay)
-        self.arrow2 = Arrow(1, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
+        self.arrow2 = Round(1, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
                             autoPlay=autoplay)
-        self.arrow3 = Arrow(2, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
+        self.arrow3 = Round(2, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
                             autoPlay=autoplay)
-        self.arrow4 = Arrow(3, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
+        self.arrow4 = Round(3, parent=self, timeList=self.timeList, trackLength=surfaceLength, unitDis=unitDis,
                             autoPlay=autoplay)
 
         # Entity(
@@ -245,34 +299,40 @@ class GameSurface(Entity):
             self.sound = Audio(f'./assets/mods/{self.songName}/song/song.ogg')
             self.started = True
 
-    # def update(self):
-    #     self.rotation_z += 1
-
-
-
-# gameSuface2 = GameSurface()
-# gameSuface.x = -0.2
-# gameSuface2.x = 0.2
 
 
 
 
+# class NoteShadow(Entity):
+#     def __init__(self,bindChart):
+#         super().__init__()
+#         self.model = 'quad'
+#         self.texture = './assets/images/note.png'
+#         self.parent = bindChart.parent
+#         self.scale = bindChart.scale
+#         self.position = bindChart.position
+#         self.aniLast = time.time()
+#         self.alpha = 0.6
+#
+#     def update(self):
+#         if time.time() >= self.aniLast + 1/200:
+#             self.alpha -= 0.01
+#             self.aniLast = time.time()
+#
+#         if self.alpha <= 0.02:
+#             destroy(self)
+#             return
+# 卡成史
 
 
-class Chart(Entity):
+class Note(Entity):
     def __init__(self,bindArrow,originY,parent,speed,tailLength,trackId):
         super().__init__()
-        self.noteTexture = [
-            arrowTextures.note_alone.PURPLE,
-            arrowTextures.note_alone.BLUE,
-            arrowTextures.note_alone.GREEN,
-            arrowTextures.note_alone.RED,
-        ]
         self.model = 'quad'
         self.parent = parent
         # self.x = 1
         self.scale = bindArrow.scale
-        self.texture = self.noteTexture[bindArrow.arrowId]
+        self.texture = './assets/images/note.png'
         self.y = bindArrow.y - originY
         self.bindArrow = bindArrow
         self.speed = speed
@@ -289,6 +349,8 @@ class Chart(Entity):
 
         chartEntity.append(self)
 
+        self.genShadowLast = time.time()
+
 
     def update(self):
 
@@ -296,23 +358,34 @@ class Chart(Entity):
         global currentScore
         global currentDestroy
 
+        # if time.time() >= self.genShadowLast + 0.01:
+        #     NoteShadow(self)
+        #     self.genShadowLast = time.time()
+        # 卡成史
+
         # print_on_screen(currentDestroy)
         self.y = self.originY + (time.time()-self.aniLast)*200 * self.speed
 
-        if self.y > self.bindArrow.y + (self.speed*windowRange/1000*200) and not self.missed:
-            currentMisses += 1
-            healthBars.damage_self()
-            currentScore += -100
-            self.missed = True
-        try:
-            if self.y > self.bindArrow.y + (self.speed * windowRange / 1000 * 200) + self.tail.scale_y:
-                destroy(self.tail)
-                destroy(self)
-                chartEntity.remove(self)
-        except Exception:
-            if self.y > self.bindArrow.y + (self.speed * windowRange / 1000 * 200):
-                destroy(self)
-                chartEntity.remove(self)
+        if not settings.autoPlay:
+            if self.y > self.bindArrow.y + (self.speed*windowRange/1000*200) and not self.missed:
+                currentMisses += 1
+                healthBars.damage_self()
+                currentScore += -100
+                self.missed = True
+            try:
+                if self.y > self.bindArrow.y + (self.speed * windowRange / 1000 * 200) + self.tail.scale_y:
+                    destroy(self.tail)
+                    destroy(self)
+                    chartEntity.remove(self)
+            except Exception:
+                if self.y > self.bindArrow.y + (self.speed * windowRange / 1000 * 200):
+                    destroy(self)
+                    chartEntity.remove(self)
+        else:
+            if self.y >= self.bindArrow.y:
+                self.chartPress()
+                self.bindArrow.round_inside.pressAni()
+
 
 
         # print(self.y)
@@ -325,18 +398,15 @@ class Chart(Entity):
         global currentScore
         if self.y >= self.bindArrow.y - (self.speed*windowRange/1000*200):
             self.tail.bindObj = self.bindArrow
-            self.tail.needHold = True
+            if not settings.autoPlay:
+                self.tail.needHold = True
             healthBars.damage_enemy()
-            currentScore += int(300 - 300*(abs(self.bindArrow.y - self.y)/(self.speed * windowRange / 1000 * 200)))
-            # print_on_screen(
-            #     str(int(300 - 300*(abs(self.bindArrow.y - self.y)/(self.speed * windowRange / 1000 * 200))))+'\n'+
-            #     str(abs(self.bindArrow.y - self.y))
-            # )
-            # print_on_screen(abs(self.bindArrow.y - self.y))
-
+            if not settings.autoPlay:
+                currentScore += int(300 - 300*(abs(self.bindArrow.y - self.y)/(self.speed * windowRange / 1000 * 200)))
+            else:
+                currentScore += 300
             destroy(self)
             chartEntity.remove(self)
-
 
 
 class Tail(Entity):
@@ -349,20 +419,8 @@ class Tail(Entity):
         self.origin_y = 0.5
         self.parent = parent
 
-        # self.noteTexture = [
-        #     arrowTextures.note_alone.PURPLE,
-        #     arrowTextures.note_alone.BLUE,
-        #     arrowTextures.note_alone.GREEN,
-        #     arrowTextures.note_alone.RED,
-        # ]
 
-        self.textures = [
-            arrowTextures.holds.PURPLE,
-            arrowTextures.holds.BLUE,
-            arrowTextures.holds.GREEN,
-            arrowTextures.holds.RED
-        ]
-        self.texture = self.textures[bindObj.trackId]
+        self.texture = './assets/images/holdRect.png'
 
         self.scale = (bindObj.scale_x * 0.3, length_unit * unitDis)
         self.bindObj = bindObj
@@ -381,7 +439,7 @@ class Tail(Entity):
 
         # if self.scale_y <= 1 ^ 20:
 
-        if self.scale_y <= 9.999999717180685e-9:
+        if self.scale_y <= 9.999999717180685e-7:
             destroy(self)
             return
 
@@ -391,14 +449,12 @@ class Tail(Entity):
         except Exception:
             pass
 
-
-        if self.needHold and not self.needHoldLast:
+        if (self.needHold and not self.needHoldLast):
             self.aniLast = time.time()
             self.scale_y -= (self.y - self.bindObj.y)
             self.aniStart = self.scale_y
             self.needHoldLast = True
             self.damageLast = time.time()
-
 
         if self.needHold:
             self.scale_y = (self.aniStart-((time.time()-self.aniLast)*200*self.unitDis))
@@ -407,19 +463,36 @@ class Tail(Entity):
                 currentScore += 50
                 self.damageLast = time.time()
 
+        elif not self.needHold and isinstance(self.bindObj, Round):
+            if not settings.autoPlay:
+                if not self.missed:
+                    currentMisses += 1
+                    self.missed = True
+                self.alpha -= 0.01
+                if self.alpha <= 0.02:
+                    destroy(self)
+                    return
+            else:
+                self.bindObj.round_inside.pressAni()
+                if not self.needHoldLast:
+                    self.aniLast = time.time()
+                    self.scale_y -= (self.y - self.bindObj.y)
+                    self.aniStart = self.scale_y
+                    self.needHoldLast = True
+                    self.damageLast = time.time()
+                self.scale_y = (self.aniStart - ((time.time() - self.aniLast) * 200 * self.unitDis))
+                if time.time() >= self.damageLast + 0.3:
+                    healthBars.damage_enemy()
+                    currentScore += 50
+                    self.damageLast = time.time()
 
-        elif not self.needHold and isinstance(self.bindObj,Arrow):
-            if not self.missed:
-                currentMisses += 1
-                self.missed = True
-            self.alpha -= 0.01
-            if self.alpha <= 0.02:
-                destroy(self)
-                return
 
         self.x = self.bindObj.x
         self.z = self.bindObj.z
         self.y = self.bindObj.y
+
+
+
 
     def input(self,event):
         pass
@@ -431,10 +504,10 @@ class Tail(Entity):
 
 
 
-# Chart(gameSuface.arrow1,originY=5,speed=0.3)
-# Chart(gameSuface.arrow2,originY=5,speed=0.3)
-# Chart(gameSuface.arrow3,originY=5,speed=0.3)
-# Chart(gameSuface.arrow4,originY=5,speed=0.3)
+# Note(gameSuface.arrow1,originY=5,speed=0.3)
+# Note(gameSuface.arrow2,originY=5,speed=0.3)
+# Note(gameSuface.arrow3,originY=5,speed=0.3)
+# Note(gameSuface.arrow4,originY=5,speed=0.3)
 
 def update():
     global currentScore

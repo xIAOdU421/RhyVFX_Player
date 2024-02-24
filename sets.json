@@ -6,6 +6,5 @@
     ";",
     "'"
   ],
-  "gameUi_style": "basic",
-  "arrowsStyle": "basic"
+  "autoplay": true
 }

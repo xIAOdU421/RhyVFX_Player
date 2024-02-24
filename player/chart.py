@@ -2,7 +2,7 @@ import json
 
 
 def unit2time(name):
-    with open(f'assets/mods/{name}/song/notes.json','r') as f:
+    with open(f'assets/song/notes.json','r') as f:
         chartContent = json.load(f)
 
     chartList = [{}, {}, {}, {}]
@@ -24,10 +24,10 @@ def resortDict(dict):
     return output
 
 
-print(unit2time('raining'))
+# print(unit2time('raining'))
 
 def getChartAttr(name):
-    with open(f'assets/mods/{name}/song/notes.json','r') as f:
+    with open(f'assets/song/notes.json','r') as f:
         chartContent = json.load(f)
 
     return chartContent

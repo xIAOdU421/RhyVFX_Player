@@ -15,11 +15,11 @@ from player.player import *
 # EditorCamera()
 window.borderless = False
 
-from player.mod import *
+from mod import *
 
 mod = Mod()
 # camera.fov = 60
-# camera.shader = camera_vertical_blur_shader
+camera.shader = camera_vertical_blur_shader
 camera.z = 0
 
 

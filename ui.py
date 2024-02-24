@@ -5,7 +5,7 @@ import settings
 from settings import *
 
 
-class GameUi_basic(Entity):
+class GameUi(Entity):
 
     def __init__(self):
         super().__init__()
@@ -56,6 +56,8 @@ class GameUi_basic(Entity):
                           )
         # self.startButton = Button('Start!')
 
+gameUi = GameUi()
+
 
 if __name__ == '__main__':
     app = Ursina()
@@ -64,10 +66,6 @@ if __name__ == '__main__':
     camera.z = 0
     # tester = Entity(model='cube')
 
-
-
-if settings.gameUi_style == 'basic':
-    gameUi = GameUi_basic()
 
 
 if __name__ == '__main__':
