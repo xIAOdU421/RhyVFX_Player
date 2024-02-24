@@ -66,3 +66,5 @@ assets/images/test/4.png
 test.py
 *.pyc
 .idea/RhyVFX_Player.iml
+*.pyd
+*.dll

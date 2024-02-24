@@ -1,8 +1,12 @@
 #
 from ursina import *
 
+import appdata
 import settings
 from settings import *
+
+if __name__ == '__main__':
+    app = Ursina()
 
 
 class GameUi(Entity):
@@ -25,7 +29,8 @@ class GameUi(Entity):
             # 'rating':(.132,-.18,0),
             # 'rating':(.132,-.18,0),
             'rating': (114, 514, 0),
-            'accuracy':(191,9810,0)
+            'accuracy':(191,9810,0),
+            'version':(-0.34,.19)
         }
 
         self.uiStyle = {
@@ -54,21 +59,21 @@ class GameUi(Entity):
                           parent=self,
                            scale=self.uiStyle['textScale']
                           )
+        self.version = Text(text=f'{appdata.name} {appdata.version}',
+                            position=self.uiPos['version'],
+                            parent=self,
+                            scale=self.uiStyle['textScale'])
         # self.startButton = Button('Start!')
 
 gameUi = GameUi()
 
 
 if __name__ == '__main__':
-    app = Ursina()
+
     window.borderless = False
     EditorCamera()
     camera.z = 0
     # tester = Entity(model='cube')
-
-
-
-if __name__ == '__main__':
     app.run()
 
 
