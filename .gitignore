@@ -74,3 +74,4 @@ test.py
 test.fsh
 assets/images/ui/healthBar.png
 ./assets/song/song.ogg
+./output
